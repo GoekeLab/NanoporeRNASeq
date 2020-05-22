@@ -1,0 +1,15 @@
+# R proj user
+.Rproj.user
+NanoporeRNASeq.Rproj
+
+# R history
+.Rhistory
+
+# R data
+.RData
+.Ruserdata
+inst/doc
+
+# Big files
+*.bam
+

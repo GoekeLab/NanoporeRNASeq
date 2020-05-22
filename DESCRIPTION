@@ -1,0 +1,45 @@
+Package: NanoporeRNASeq
+Type: Package
+Title: Nanopore RNA-Seq data
+Version: 0.9.0
+Authors@R: c(person("Jonathan Goeke", "Developer", role = "aut",
+                     email = "gokej@gis.a-star.edu.sg"),
+              person("Ying Chen", "Developer", role = "cre",email = "chen_ying@gis.a-star.edu.sg"))
+Description: Data examples of  
+License: GPL-3 
+Encoding: UTF-8
+LazyData: true
+Depends: 
+   R(>= 3.2.0),
+   data.table(>= 1.1.8),
+   SummarizedExperiment(>= 1.1.6),
+   GenomicRanges,
+   GenomicFeatures
+Suggests: 
+    knitr,
+    rmarkdown,
+    fs,
+    testthat
+Enhances: parallel
+SystemRequirements:
+biocViews: 
+     FeatureExtraction, 
+     GeneExpression, 
+     GeneExpressionWorkflow, 
+     GenomeAnnotation,
+     ImmunoOncology, 
+     Normalization, 
+     RNASeq, 
+     Regression, 
+     Sequencing, 
+     Software, 
+     Transcription, 
+     Transctiptomics,
+     TxDb.Hsapiens.UCSC.hg38.knownGene
+bugReports: https://github.com/GoekeLab/bambu/issues
+URL: https://github.com/GoekeLab/bambu   
+RoxygenNote: 7.1.0
+Imports:
+    S4Vectors(>= 0.22.1), 
+    IRanges
+VignetteBuilder: knitr
