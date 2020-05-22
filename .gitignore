@@ -10,6 +10,3 @@ NanoporeRNASeq.Rproj
 .Ruserdata
 inst/doc
 
-# Big files
-*.bam
-
