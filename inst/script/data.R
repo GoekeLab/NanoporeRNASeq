@@ -4,7 +4,7 @@
 # save(sample_info, file = "sample_info.RData")
 
 
-bamFileNames = dir("./inst/extdata/", pattern = '.bam$')
+# bamFileNames = dir("./inst/extdata/", pattern = '.bam$')
 # save(bamFileNames, file = "./data/bamFileNames.RData")
 
 
