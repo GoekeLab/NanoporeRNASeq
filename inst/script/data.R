@@ -4,8 +4,8 @@
 # save(sample_info, file = "sample_info.RData")
 
 
-# bamFileNames = dir("./inst/extdata/", pattern = '.bam$')
-# save(bamFileNames, file = "./data/bamFileNames.RData")
+bamFileNames = dir("./inst/extdata/", pattern = '.bam$')
+save(bamFileNames, file = "./data/bamFileNames.RData")
 
 
 # gtf.file <- "Homo_sapiens.GRCh38.91.gtf"
