@@ -19,10 +19,37 @@ knitr::opts_chunk$set(
 
 
 ```{r setup}
+## load packages
 library(NanoporeRNASeq)
+library(bambu)
 ```
 
 
+```{r}
+##get bam file paths from the package
+data("bamFileNames")
+readlist <- system.file("extdata", bamFileNames, package="NanoporeRNASeq")
+```
 
+```{r}
+##get annotation GRangesList from the package
+data("annotationGrangesList_chr22_1_25409234")
+annotations <- annotationGrangesList_chr22_1_25409234
+```
 
+```{r}
+##get genome sequence from the package/load BSgenome
+#Option 1: load genome fasta file from the package
+genome <- system.file("extdata", "Homo_sapiens.GRCh38.dna_sm.primary_assembly_chr22_1_25409234.fa", package="NanoporeRNASeq")
+#Option 2: load BSgenome
+library(BSgenome.Hsapiens.NCBI.GRCh38)
+genome <- BSgenome.Hsapiens.NCBI.GRCh38
+```
+
+```{r}
+##run bambu
+se <- bambu(reads = readlist, annotations=annotations,genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
+##write bambu output to an output directory
+writeBambuOutput(se,"output/")
+```
 
