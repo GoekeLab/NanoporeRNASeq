@@ -23,19 +23,9 @@ Suggests:
 Enhances: parallel
 SystemRequirements:
 biocViews: 
-     FeatureExtraction, 
-     GeneExpression, 
-     GeneExpressionWorkflow, 
-     GenomeAnnotation,
-     ImmunoOncology, 
-     Normalization, 
-     RNASeq, 
-     Regression, 
-     Sequencing, 
-     Software, 
-     Transcription, 
-     Transctiptomics,
-     TxDb.Hsapiens.UCSC.hg38.knownGene
+     ExperimentHub,
+     RNASeqData,
+     SequencingData
 bugReports: https://github.com/GoekeLab/bambu/issues
 URL: https://github.com/GoekeLab/bambu   
 RoxygenNote: 7.1.0
