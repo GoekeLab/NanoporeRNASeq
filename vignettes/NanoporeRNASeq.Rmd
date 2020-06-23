@@ -17,39 +17,123 @@ knitr::opts_chunk$set(
 )
 ```
 
+##Introduction
+*[NanoporeRNASeq](https://github.com/GoekeLab/NanoporeRNASeq)* contains single chromosome RNA-Seq data from two common cell lines K562 and MCF7. Each of these cell line has three replicates, with 1 direct RNA sequencing data and 2 cDNA sequencing data. 
 
+##Accessing NanoporeRNASeq data
+###Load the NanoporeRNASeq package
 ```{r setup}
-## load packages
-library(NanoporeRNASeq)
-library(bambu)
+library("NanoporeRNASeq")
 ```
 
-
+###Get the paths to the bam files
 ```{r}
-##get bam file paths from the package
 data("bamFileNames")
 readlist <- system.file("extdata", bamFileNames, package="NanoporeRNASeq")
 ```
 
+###Get the annotation GRangesList
 ```{r}
-##get annotation GRangesList from the package
 data("annotationGrangesList_chr22_1_25409234")
-annotations <- annotationGrangesList_chr22_1_25409234
 ```
 
+###Get the genome sequence
+Option 1: get the path to the genome fasta file from the package
 ```{r}
-##get genome sequence from the package/load BSgenome
-#Option 1: load genome fasta file from the package
 genome <- system.file("extdata", "Homo_sapiens.GRCh38.dna_sm.primary_assembly_chr22_1_25409234.fa", package="NanoporeRNASeq")
-#Option 2: load BSgenome
+```
+Option 2: load BSgenome
+```{r}
 library(BSgenome.Hsapiens.NCBI.GRCh38)
-genome <- BSgenome.Hsapiens.NCBI.GRCh38
 ```
 
+##Getting coverage information with GenomicAlignments
+###Load GenomicAlignments and GenomicRanges
 ```{r}
-##run bambu
-se <- bambu(reads = readlist, annotations=annotations,genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
+library(GenomicAlignments)
+library(GenomicRanges)
+library(ggplot2)
+```
+###Get coverage of a single bam file
+```{r, fig.width = 8, fig.height = 6}
+#get the path of the first bam file in the readlist
+##replace list index to get path for another file 
+bamfile_name <- bamFileNames[1]
+bamfile_path <- readlist[1]
+#load bam file into a GAlignments object
+ga <- readGAlignments(bamfile_path)
+#get coverage of the alignment
+ga_coverage <- coverage(ga)
+#visualize the coverage of a specified range (the last 10kb here)
+##change the IRanges(start,end) to your region of interest
+range <- GRanges("22",IRanges(25309234,25409234))
+ga_coverage[range]
+ga_cov_df <-data.frame(Coordinate = 25309234:25409234,
+                       Coverage = as.numeric(ga_coverage$`22`[ranges(range)]))
+ggplot(ga_cov_df, aes(x=Coordinate, y=Coverage, group=1))+
+  geom_line()+
+  labs(title=paste("Coverage Plot of", bamfile_name, sep=" "))
+```
+
+## Running Bambu with NanoporeRNASeq data
+###Load the bambu package
+```{r}
+library(bambu)
+#packages for plotting
+library(circlize)
+library(ComplexHeatmap)
+library(ggbio)
+```
+
+###Run bambu
+Option 1: apply *bambu* to perform EM on  extended annotations
+```{r}
+seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 6)
+seExtended
+```
+Option 2: apply *bambu* for quantification without isoform discovery
+```{r}
+se <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = FALSE, verbose = FALSE, ncore = 6)
+se
+```
+```{r}
 ##write bambu output to an output directory
 writeBambuOutput(se,"output/")
 ```
+###Check and visualize the estimated transcript expression
+Option 1: using heatmap:
+```{r, fig.width = 8, fig.height = 6}
+colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
+colnames(seExtended) <- gsub("_genome_chr22_1_25409234","",colnames(seExtended))
+colData(seExtended)$name <- gsub("_genome_chr22_1_25409234","",colData(seExtended)$name)
+plot.bambu(seExtended, group.variable = "groupVar", type = "heatmap")
+```
+Option 2: using PCA plot
+```{r, fig.width = 8, fig.height = 6}
+colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
+plot.bambu(seExtended, group.variable = "groupVar", type = "pca")
+```
 
+###Check for single gene examples
+Single gene examples can also be checked using plot functions from *bambu*
+```{r, fig.width = 8, fig.height = 10}
+plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
+```
+
+###Obtain gene expression from transcript expression
+```{r}
+seGene <- transcriptToGeneExpression(seExtended)
+seGene
+```
+
+###Check and visualize gene expression 
+Option 1: using heatmap
+```{r, fig.width = 8, fig.height = 6}
+colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
+plot.bambu(seGene, group.variable = "groupVar", type = "heatmap")
+```
+Option 2: using PCA plot
+```{r, fig.width = 8, fig.height = 6}
+colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
+plot.bambu(seGene, group.variable = "groupVar", type = "pca")
+```
