@@ -28,23 +28,13 @@ library("NanoporeRNASeq")
 
 ###Get the paths to the bam files
 ```{r}
-data("bamFileNames")
-readlist <- system.file("extdata", bamFileNames, package="NanoporeRNASeq")
+data("bamFiles")
+readlist <- system.file("extdata", bamFiles, package="NanoporeRNASeq")
 ```
 
 ###Get the annotation GRangesList
 ```{r}
 data("annotationGrangesList_chr22_1_25409234")
-```
-
-###Get the genome sequence
-Option 1: get the path to the genome fasta file from the package
-```{r}
-genome <- system.file("extdata", "Homo_sapiens.GRCh38.dna_sm.primary_assembly_chr22_1_25409234.fa", package="NanoporeRNASeq")
-```
-Option 2: load BSgenome
-```{r}
-library(BSgenome.Hsapiens.NCBI.GRCh38)
 ```
 
 ##Getting coverage information with GenomicAlignments
@@ -58,7 +48,7 @@ library(ggplot2)
 ```{r, fig.width = 8, fig.height = 6}
 #get the path of the first bam file in the readlist
 ##replace list index to get path for another file 
-bamfile_name <- bamFileNames[1]
+bamfile_name <- bamFiles[1]
 bamfile_path <- readlist[1]
 #load bam file into a GAlignments object
 ga <- readGAlignments(bamfile_path)
@@ -79,6 +69,7 @@ ggplot(ga_cov_df, aes(x=Coordinate, y=Coverage, group=1))+
 ###Load the bambu package
 ```{r}
 library(bambu)
+library(BSgenome.Hsapiens.NCBI.GRCh38)
 #packages for plotting
 library(circlize)
 library(ComplexHeatmap)
@@ -86,19 +77,11 @@ library(ggbio)
 ```
 
 ###Run bambu
-Option 1: apply *bambu* to perform EM on  extended annotations
 ```{r}
-seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 6)
+seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
 seExtended
-```
-Option 2: apply *bambu* for quantification without isoform discovery
-```{r}
-se <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = FALSE, verbose = FALSE, ncore = 6)
-se
-```
-```{r}
 ##write bambu output to an output directory
-writeBambuOutput(se,"output/")
+writeBambuOutput(seExtended,"output/")
 ```
 ###Check and visualize the estimated transcript expression
 Option 1: using heatmap:
