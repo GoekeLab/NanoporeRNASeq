@@ -10,8 +10,8 @@ sample_info <- readRDS(sample.file)
 save(sample_info, file = "./data/sample_info.RData", version = 2)
 
 #create bamFileNames.RData
-bamFileNames = dir("./inst/extdata/", pattern = '.bam$')
-save(bamFileNames, file = "./data/bamFileNames.RData", version = 2)
+bamFiles = dir("./inst/extdata/", pattern = '.bam$')
+save(bamFiles, file = "./data/bamFiles.RData", version = 2)
 
 #Download the Homo_sapiens.GRCh38.91.gtf from ensembl ftp
 download.file(url = "ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.91.gtf.gz",
