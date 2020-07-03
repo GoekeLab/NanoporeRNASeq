@@ -17,27 +17,27 @@ knitr::opts_chunk$set(
 )
 ```
 
-##Introduction
+## Introduction
 *[NanoporeRNASeq](https://github.com/GoekeLab/NanoporeRNASeq)* contains single chromosome RNA-Seq data from two common cell lines K562 and MCF7. Each of these cell line has three replicates, with 1 direct RNA sequencing data and 2 cDNA sequencing data. 
 
-##Accessing NanoporeRNASeq data
-###Load the NanoporeRNASeq package
+## Accessing NanoporeRNASeq data
+### Load the NanoporeRNASeq package
 ```{r setup}
 library("NanoporeRNASeq")
 ```
 
-###Get the paths to the bam files
+### Get the paths to the bam files
 ```{r}
 data("bamFiles")
 readlist <- system.file("extdata", bamFiles, package="NanoporeRNASeq")
 ```
 
-###Get the annotation GRangesList
+### Get the annotation GRangesList
 ```{r}
 data("annotationGrangesList_chr22_1_25409234")
 ```
 
-###Get coverage of a single bam file
+## Get coverage of a single bam file
 ```{r, fig.width = 8, fig.height = 6}
 library(ggbio)
 #get the path of the first bam file in the readlist
@@ -50,7 +50,7 @@ autoplot(bamfile_path,which=range)
 ```
 
 ## Running Bambu with NanoporeRNASeq data
-###Load the bambu package
+### Load the bambu package
 ```{r}
 library(bambu)
 library(BSgenome.Hsapiens.NCBI.GRCh38)
@@ -60,14 +60,14 @@ library(ComplexHeatmap)
 library(ggbio)
 ```
 
-###Run bambu
+### Run bambu
 ```{r}
 seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
 seExtended
 ##write bambu output to an output directory
 writeBambuOutput(seExtended,"output/")
 ```
-###Check and visualize the estimated transcript expression
+### Check and visualize the estimated transcript expression
 Option 1: using heatmap:
 ```{r, fig.width = 8, fig.height = 6}
 colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
@@ -81,19 +81,19 @@ colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) 
 plot.bambu(seExtended, group.variable = "groupVar", type = "pca")
 ```
 
-###Check for single gene examples
+### Check for single gene examples
 Single gene examples can also be checked using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
 plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
 ```
 
-###Obtain gene expression from transcript expression
+### Obtain gene expression from transcript expression
 ```{r}
 seGene <- transcriptToGeneExpression(seExtended)
 seGene
 ```
 
-###Check and visualize gene expression 
+### Check and visualize gene expression 
 Option 1: using heatmap
 ```{r, fig.width = 8, fig.height = 6}
 colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
