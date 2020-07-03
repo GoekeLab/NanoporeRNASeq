@@ -56,23 +56,14 @@ library(ggplot2)
 ```
 ###Get coverage of a single bam file
 ```{r, fig.width = 8, fig.height = 6}
+library(ggbio)
 #get the path of the first bam file in the readlist
 ##replace list index to get path for another file 
 bamfile_name <- bamFileNames[1]
 bamfile_path <- readlist[1]
-#load bam file into a GAlignments object
-ga <- readGAlignments(bamfile_path)
-#get coverage of the alignment
-ga_coverage <- coverage(ga)
-#visualize the coverage of a specified range (the last 10kb here)
-##change the IRanges(start,end) to your region of interest
-range <- GRanges("22",IRanges(25309234,25409234))
-ga_coverage[range]
-ga_cov_df <-data.frame(Coordinate = 25309234:25409234,
-                       Coverage = as.numeric(ga_coverage$`22`[ranges(range)]))
-ggplot(ga_cov_df, aes(x=Coordinate, y=Coverage, group=1))+
-  geom_line()+
-  labs(title=paste("Coverage Plot of", bamfile_name, sep=" "))
+#example: the coverage of MAPK1 (chr22:21759657-21867680)
+range <- GRanges("22",IRanges(21759657,21867680))
+autoplot(bamfile_path,which=range)
 ```
 
 ## Running Bambu with NanoporeRNASeq data
