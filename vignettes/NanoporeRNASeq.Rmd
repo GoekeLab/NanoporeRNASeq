@@ -64,21 +64,6 @@ library(ggbio)
 ```{r}
 seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
 seExtended
-##write bambu output to an output directory
-writeBambuOutput(seExtended,"output/")
-```
-### Check and visualize the estimated transcript expression
-Option 1: using heatmap:
-```{r, fig.width = 8, fig.height = 6}
-colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
-colnames(seExtended) <- gsub("_genome_chr22_1_25409234","",colnames(seExtended))
-colData(seExtended)$name <- gsub("_genome_chr22_1_25409234","",colData(seExtended)$name)
-plot.bambu(seExtended, group.variable = "groupVar", type = "heatmap")
-```
-Option 2: using PCA plot
-```{r, fig.width = 8, fig.height = 6}
-colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seExtended, group.variable = "groupVar", type = "pca")
 ```
 
 ### Check for single gene examples
@@ -91,16 +76,4 @@ plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)
 ```{r}
 seGene <- transcriptToGeneExpression(seExtended)
 seGene
-```
-
-### Check and visualize gene expression 
-Option 1: using heatmap
-```{r, fig.width = 8, fig.height = 6}
-colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seGene, group.variable = "groupVar", type = "heatmap")
-```
-Option 2: using PCA plot
-```{r, fig.width = 8, fig.height = 6}
-colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seGene, group.variable = "groupVar", type = "pca")
 ```
