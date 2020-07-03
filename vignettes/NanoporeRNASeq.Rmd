@@ -42,7 +42,7 @@ data("annotationGrangesList_chr22_1_25409234")
 library(ggbio)
 #get the path of the first bam file in the readlist
 ##replace list index to get path for another file 
-bamfile_name <- bamFileNames[1]
+bamfile_name <- bamFiles[1]
 bamfile_path <- readlist[1]
 #example: the coverage of MAPK1 (chr22:21759657-21867680)
 range <- GRanges("22",IRanges(21759657,21867680))
