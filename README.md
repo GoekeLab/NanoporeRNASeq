@@ -1,2 +1,2 @@
 # NanoporeRNASeq
-Nanopore RNASeq data 
+The NanoporeRNASeq package contains long readRNA-Seq data generated using Oxford Nanopore Sequencing. The data consists of 6 samples from two human cell lines (K562 and MCF7). Each of these cell lines has three replicates, with 1 direct RNA sequencing data and 2 cDNA sequencing data. Reads are aligned to chromosome 22  (Grch38) and stored as bam files. The original data is from the SG-NEx project. Please see the package vignette for examples and use cases.
