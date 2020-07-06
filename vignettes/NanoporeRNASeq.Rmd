@@ -17,114 +17,75 @@ knitr::opts_chunk$set(
 )
 ```
 
-##Introduction
+## Introduction
 *[NanoporeRNASeq](https://github.com/GoekeLab/NanoporeRNASeq)* contains single chromosome RNA-Seq data from two common cell lines K562 and MCF7. Each of these cell line has three replicates, with 1 direct RNA sequencing data and 2 cDNA sequencing data. 
 
-##Accessing NanoporeRNASeq data
-###Load the NanoporeRNASeq package
+## Accessing NanoporeRNASeq data
+### Load the NanoporeRNASeq package
 ```{r setup}
 library("NanoporeRNASeq")
 ```
 
-###Get the paths to the bam files
+### Get the paths to the bam files
 ```{r}
-data("bamFileNames")
-readlist <- system.file("extdata", bamFileNames, package="NanoporeRNASeq")
+data("bamFiles")
+readlist <- system.file("extdata", bamFiles, package="NanoporeRNASeq")
 ```
 
-###Get the annotation GRangesList
+### Get the annotation GRangesList
 ```{r}
-data("annotationGrangesList_chr22_1_25409234")
+data("annotation")
 ```
 
-###Get the genome sequence
-Option 1: get the path to the genome fasta file from the package
-```{r}
-genome <- system.file("extdata", "Homo_sapiens.GRCh38.dna_sm.primary_assembly_chr22_1_25409234.fa", package="NanoporeRNASeq")
-```
-Option 2: load BSgenome
-```{r}
-library(BSgenome.Hsapiens.NCBI.GRCh38)
-```
-
-##Getting coverage information with GenomicAlignments
-###Load GenomicAlignments and GenomicRanges
-```{r}
-library(GenomicAlignments)
-library(GenomicRanges)
-library(ggplot2)
-```
-###Get coverage of a single bam file
-```{r, fig.width = 8, fig.height = 6}
+## Get coverage of a single bam file
+overall estimated coverage distribution
+```{r, fig.width = 8, fig.height = 12}
 library(ggbio)
+library(GenomicAlignments)
 #get the path of the first bam file in the readlist
-##replace list index to get path for another file 
-bamfile_name <- bamFileNames[1]
+##replace list index to get path for another file
 bamfile_path <- readlist[1]
-#example: the coverage of MAPK1 (chr22:21759657-21867680)
-range <- GRanges("22",IRanges(21759657,21867680))
-autoplot(bamfile_path,which=range)
+bamfile <- BamFile(bamfile_path)
+ga <- readGAlignments(bamfile, use.names = TRUE)
+autoplot(ga, method="estimate")
+```
+coverage of a single gene ENST00000215832 (MAPK1)
+```{r, fig.width = 8, fig.height = 12}
+data("genesymbol", package = "biovizBase")
+range <- annotation$ENST00000215832
+autoplot(bamfile,  method="raw", which=range)
+```
+show mismatch proportion in ENST00000215832 (MAPK1)
+```{r, fig.width = 8, fig.height = 12}
+library(BSgenome.Hsapiens.NCBI.GRCh38)
+autoplot(bamfile, stat="mismatch", which=range, bsgenome=Hsapiens)
 ```
 
 ## Running Bambu with NanoporeRNASeq data
-###Load the bambu package
+### Load the bambu package
 ```{r}
 library(bambu)
+library(BSgenome.Hsapiens.NCBI.GRCh38)
 #packages for plotting
 library(circlize)
 library(ComplexHeatmap)
 library(ggbio)
 ```
 
-###Run bambu
-Option 1: apply *bambu* to perform EM on  extended annotations
+### Run bambu
 ```{r}
-seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 6)
+seExtended <- bambu(reads = readlist, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
 seExtended
 ```
-Option 2: apply *bambu* for quantification without isoform discovery
-```{r}
-se <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = FALSE, verbose = FALSE, ncore = 6)
-se
-```
-```{r}
-##write bambu output to an output directory
-writeBambuOutput(se,"output/")
-```
-###Check and visualize the estimated transcript expression
-Option 1: using heatmap:
-```{r, fig.width = 8, fig.height = 6}
-colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
-colnames(seExtended) <- gsub("_genome_chr22_1_25409234","",colnames(seExtended))
-colData(seExtended)$name <- gsub("_genome_chr22_1_25409234","",colData(seExtended)$name)
-plot.bambu(seExtended, group.variable = "groupVar", type = "heatmap")
-```
-Option 2: using PCA plot
-```{r, fig.width = 8, fig.height = 6}
-colData(seExtended)$groupVar <-  unlist(lapply(colnames(seExtended),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seExtended, group.variable = "groupVar", type = "pca")
-```
 
-###Check for single gene examples
+### Check for single gene examples
 Single gene examples can also be checked using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
 plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
 ```
 
-###Obtain gene expression from transcript expression
+### Obtain gene expression from transcript expression
 ```{r}
 seGene <- transcriptToGeneExpression(seExtended)
 seGene
-```
-
-###Check and visualize gene expression 
-Option 1: using heatmap
-```{r, fig.width = 8, fig.height = 6}
-colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seGene, group.variable = "groupVar", type = "heatmap")
-```
-Option 2: using PCA plot
-```{r, fig.width = 8, fig.height = 6}
-colData(seGene)$groupVar <-  unlist(lapply(colnames(seGene),function(x) unlist(strsplit(x,"_"))[2]))
-plot.bambu(seGene, group.variable = "groupVar", type = "pca")
 ```
