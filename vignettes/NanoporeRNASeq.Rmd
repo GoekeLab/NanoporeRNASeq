@@ -34,7 +34,7 @@ readlist <- system.file("extdata", bamFiles, package="NanoporeRNASeq")
 
 ### Get the annotation GRangesList
 ```{r}
-data("annotationGrangesList_chr22_1_25409234")
+data("annotation")
 ```
 
 ## Get coverage of a single bam file
@@ -62,7 +62,7 @@ library(ggbio)
 
 ### Run bambu
 ```{r}
-seExtended <- bambu(reads = readlist, annotations = annotationGrangesList_chr22_1_25409234, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
+seExtended <- bambu(reads = readlist, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
 seExtended
 ```
 
