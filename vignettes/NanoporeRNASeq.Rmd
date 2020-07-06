@@ -47,7 +47,7 @@ library(GenomicAlignments)
 bamfile_path <- readlist[1]
 bamfile <- BamFile(bamfile_path)
 ga <- readGAlignments(bamfile, use.names = TRUE)
-autoplot(ga, method="estimate")
+autoplot(ga, method="estimate", xlab="coordinate", ylab="estimated coverage")
 ```
 coverage of a single gene ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
