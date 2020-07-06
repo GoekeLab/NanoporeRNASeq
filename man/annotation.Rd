@@ -1,10 +1,10 @@
-\name{annotationGrangesList_chr22_1_25409234}
-\alias{annotationGrangesList_chr22_1_25409234}
+\name{annotation}
+\alias{annotation}
 \docType{data}
 \title{Annotation granges list prepared from bambu for the used chromosome}
 \description{Annotation granges list prepared from bambu for the used chromosome}
 \usage{
-  data("annotationGrangesList_chr22_1_25409234")
+  data("annotation")
 }
 \format{SummarizedExperiment}
 \keyword{datasets}
