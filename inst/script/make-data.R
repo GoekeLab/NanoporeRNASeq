@@ -30,5 +30,5 @@ gr <-GRanges(seqnames = "22",
               strand = "+")
 hits <- findOverlaps(annotationGrangesList, gr, ignore.strand = TRUE)
 annotationGrangesList_tmp <- annotationGrangesList[queryHits(hits)]
-annotationGrangesList_chr22_1_25409234 <- annotationGrangesList_tmp
-save(annotationGrangesList_chr22_1_25409234, file = "annotationGrangesList_chr22_1_25409234.RData", version = 2)
+annotation <- annotationGrangesList_tmp
+save(annotation, file = "annotation.RData", version = 2)
