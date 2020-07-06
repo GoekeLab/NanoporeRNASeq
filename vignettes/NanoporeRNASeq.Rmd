@@ -38,21 +38,12 @@ data("annotation")
 ```
 
 ## Get coverage of a single bam file
-overall estimated coverage distribution
-```{r, fig.width = 12}
-library(ggbio)
-library(GenomicAlignments)
-#get the path of the first bam file in the readlist
-##replace list index to get path for another file
-bamfile_path <- readlist[1]
-bamfile <- BamFile(bamfile_path)
-ga <- readGAlignments(bamfile, use.names = TRUE)
-autoplot(ga, method="estimate", xlab="coordinate", ylab="estimated coverage")
-```
 coverage of a single gene ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
+library(ggbio)
+bamfile <- BamFile(readlist[1])
 range <- annotation$ENST00000215832
-autoplot(bamfile,  method="raw", which=range)
+autoplot(bamfile, which=range)
 ```
 show mismatch proportion in ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
@@ -81,10 +72,4 @@ seExtended
 Single gene examples can also be checked using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
 plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
-```
-
-### Obtain gene expression from transcript expression
-```{r}
-seGene <- transcriptToGeneExpression(seExtended)
-seGene
 ```
