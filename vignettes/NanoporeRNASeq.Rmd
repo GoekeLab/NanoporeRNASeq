@@ -51,7 +51,6 @@ autoplot(ga, method="estimate")
 ```
 coverage of a single gene ENST00000215832 (MAPK1)
 ```{r, fig.width = 8, fig.height = 12}
-data("genesymbol", package = "biovizBase")
 range <- annotation$ENST00000215832
 autoplot(bamfile,  method="raw", which=range)
 ```
