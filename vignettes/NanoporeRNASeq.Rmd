@@ -29,7 +29,6 @@ library("NanoporeRNASeq")
 ### Get the paths to the bam files
 ```{r}
 data("bamFiles")
-readlist <- system.file("extdata", bamFiles, package="NanoporeRNASeq")
 ```
 
 ### Get the annotation GRangesList
@@ -41,14 +40,13 @@ data("annotation")
 coverage of a single gene ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
 library(ggbio)
-bamfile <- BamFile(readlist[1])
 range <- annotation$ENST00000215832
-autoplot(bamfile, which=range)
+autoplot(bamFiles[[1]], which=range)
 ```
 show mismatch proportion in ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
 library(BSgenome.Hsapiens.NCBI.GRCh38)
-autoplot(bamfile, stat="mismatch", which=range, bsgenome=Hsapiens)
+autoplot(bamFiles[[1]], stat="mismatch", which=range, bsgenome=Hsapiens)
 ```
 
 ## Running Bambu with NanoporeRNASeq data
@@ -64,12 +62,12 @@ library(ggbio)
 
 ### Run bambu
 ```{r}
-seExtended <- bambu(reads = readlist, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
-seExtended
+se <- bambu(reads = readlist, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38", extendAnnotations = TRUE, verbose = FALSE, ncore = 1)
+se
 ```
 
 ### Check for single gene examples
 Single gene examples can also be checked using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
-plot.bambu(seExtended, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
+plot.bambu(se, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
 ```
