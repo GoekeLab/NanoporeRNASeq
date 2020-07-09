@@ -73,5 +73,5 @@ se
 ### Check for single gene examples
 Single gene examples can also be checked using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
-plot.bambu(se, type = "annotation", gene_id = unique(rowData(seExtended)$GENEID)[10])
+plot.bambu(se, type = "annotation", gene_id = unique(rowData(se)$GENEID)[10])
 ```
