@@ -36,17 +36,21 @@ data("bamFiles")
 data("annotation")
 ```
 
-## Get coverage of a single bam file
-coverage of a single gene ENST00000215832 (MAPK1)
+## Visualizing gene of interest from a single bam file
+visualizing a single gene ENST00000215832 (MAPK1)
 ```{r, fig.width = 12}
 library(ggbio)
 range <- annotation$ENST00000215832
-autoplot(bamFiles[[1]], which=range)
-```
-show mismatch proportion in ENST00000215832 (MAPK1)
-```{r, fig.width = 12}
+# plot annotation track
+tx <- autoplot(range, aes(type = model, col = strand), group.selfish = TRUE)+guides(color = FALSE)
+# plot coverage track
+coverage <- autoplot(bamFiles[[1]], which = range)
+# plot mismatch track
 library(BSgenome.Hsapiens.NCBI.GRCh38)
-autoplot(bamFiles[[1]], stat="mismatch", which=range, bsgenome=Hsapiens)
+mismatch <- autoplot(bamFiles[[1]], stat="mismatch", which=range, bsgenome=Hsapiens)
+#merge the tracks into one plot
+tracks(annotation = tx, mismatch = mismatch, coverage = coverage,
+heights = c(1, 3, 3)) + xlim(range) + theme_minimal()
 ```
 
 ## Running Bambu with NanoporeRNASeq data
