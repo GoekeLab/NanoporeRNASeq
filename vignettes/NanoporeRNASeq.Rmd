@@ -42,15 +42,15 @@ visualizing a single gene ENST00000215832 (MAPK1)
 library(ggbio)
 range <- annotation$ENST00000215832
 # plot annotation track
-tx <- autoplot(range, aes(type = model, col = strand), group.selfish = TRUE)+guides(color = FALSE)
+tx <- autoplot(range, aes(type = model, col=strand), group.selfish = TRUE)
 # plot coverage track
-coverage <- autoplot(bamFiles[[1]], which = range)
+coverage <- autoplot(bamFiles[[1]], aes(col=coverage),which = range)
 # plot mismatch track
 library(BSgenome.Hsapiens.NCBI.GRCh38)
 mismatch <- autoplot(bamFiles[[1]], stat="mismatch", which=range, bsgenome=Hsapiens)
 #merge the tracks into one plot
 tracks(annotation = tx, mismatch = mismatch, coverage = coverage,
-heights = c(1, 3, 3)) + xlim(range) + theme_minimal()
+       heights = c(1, 3, 3))+ theme_minimal()
 ```
 
 ## Running Bambu with NanoporeRNASeq data
