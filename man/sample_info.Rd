@@ -6,5 +6,5 @@
 \usage{
   data("sample_info")
 }
-\format{data.table}
+\format{DataFrame}
 \keyword{datasets}
