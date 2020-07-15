@@ -9,19 +9,15 @@ The NanoporeRNASeq package contains long-read RNA-Seq data generated using Oxfor
 Data objects include:
 
 \itemize{
-\item \code{\link{sample_info}} - sample information of the bam files
-\item \code{\link{bamFiles}} - BamFileList containing the bam files in the package
-\item \code{\link{annotation}} - annotation GRangesList}
-}
+\item {\link{sample_info}} - sample information of the bam files
+\item {\link{bamFiles}} - BamFileList containing the bam files in the package
+\item {\link{annotation}} - annotation GRangesList}
+
 
 For detailed information on usage, see the package vignette, by typing
-\code{vignette("NanoporeRNASeq")}, or the workflow linked to on the first page
+{vignette("NanoporeRNASeq")}, or the workflow linked to on the first page
 of the vignette.
 
-The code can be viewed at the GitHub repository,
-which also lists the contributtor code of conduct:
-
-\url{https://github.com/GoekeLab/NanoporeRNASeq}
 }
 
 \author{
