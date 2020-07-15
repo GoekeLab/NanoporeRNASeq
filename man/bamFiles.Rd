@@ -6,5 +6,5 @@
 \usage{
   data("bamFiles")
 }
-\format{vector}
+\format{BamFileList}
 \keyword{datasets}
