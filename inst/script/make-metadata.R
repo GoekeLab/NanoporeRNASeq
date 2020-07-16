@@ -25,7 +25,7 @@ meta <- data.frame(
   TaxonomyId = 9606,
   Coordinate_1_based = TRUE,
   DataProvider = "SGNex",
-  Maintainer = "Ying Chen <chen_ying@gis.a-star.edu.sg>",
+  Maintainer = "The Singapore Nanopore Expression Project (SG-NEx)  <gokej@gis.a-star.edu.sg>",
   RDataClass = "vector" ,
   DispatchClass = "BamFile",
   RDataPath = c(paste("NanoporeRNASeq/inst/extdata/K562_directcDNA_replicate1.bam",
