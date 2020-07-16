@@ -5,9 +5,7 @@
 
 #create sample_info.RData
 library(NanoporeRNASeq)
-sample.file <- system.file("extdata","sample_information.rds", package = "NanoporeRNASeq")
-sample_info <- readRDS(sample.file)
-sample_info <- DataFrame(sample_info)
+sample_info <- DataFrame(readRDS(system.file("extdata","sample_information.rds", package = "NanoporeRNASeq")))
 save(sample_info, file = "./data/sample_info.RData", version = 2)
 
 #create bamFiles.RData
