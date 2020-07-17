@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = TRUE, tidy = TRUE,
   warning=FALSE, message=FALSE,
   comment = "##>"
 )
@@ -23,17 +23,21 @@ knitr::opts_chunk$set(
 ## Accessing NanoporeRNASeq data
 ### Load the NanoporeRNASeq package
 ```{r setup}
+devtools::load_all()
 library("NanoporeRNASeq")
 ```
 
 ### Get the bam file names
 ```{r}
 data("bamFiles")
+bamFiles <- Rsamtools::BamFileList(system.file("extdata", bamFiles, package = "NanoporeRNASeq"))
+bamFiles
 ```
 
 ### Get the annotation GRangesList
 ```{r}
 data("annotation")
+annotation
 ```
 
 ## Visualizing gene of interest from a single bam file
@@ -65,8 +69,8 @@ library(ggbio)
 ```
 
 ### Run bambu
-```{r}
-se <- bambu(reads = bamFilesList(system.file("extdata", bamFiles, package = "NanoporeRNASeq")), annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
+```{r, results = "hide"}
+se <- bambu(reads = bamFiles, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
 se
 ```
 
