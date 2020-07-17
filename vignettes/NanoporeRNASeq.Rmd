@@ -27,7 +27,7 @@ devtools::load_all()
 library("NanoporeRNASeq")
 ```
 
-### Get the bam file names
+### List the bam files
 ```{r}
 data("bamFiles")
 bamFiles <- Rsamtools::BamFileList(system.file("extdata", bamFiles, package = "NanoporeRNASeq"))
@@ -41,8 +41,8 @@ annotation
 ```
 
 ## Visualizing gene of interest from a single bam file
-visualizing a single gene ENST00000215832 (MAPK1)
-```{r, fig.width = 12}
+We can visualize the one sample for a single gene ENST00000215832 (MAPK1)
+```{r, fig.width = 8, fig.height = 6}
 library(ggbio)
 range <- annotation$ENST00000215832
 # plot annotation track
@@ -69,13 +69,19 @@ library(ggbio)
 ```
 
 ### Run bambu
+Applying bambu to bamFiles 
 ```{r, results = "hide"}
 se <- bambu(reads = bamFiles, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
+```
+
+*bambu* returns a SummarizedExperiment object 
+```{r}
 se
 ```
 
-### Check for single gene examples
-Single gene examples can also be checked using plot functions from *bambu*
+
+### Visualizing gene examples
+We can visualize the annotated and novel isoforms identified in this gene example using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
-plot.bambu(se, type = "annotation", gene_id = unique(rowData(se)$GENEID)[10])
+plot.bambu(se, type = "annotation", gene_id = "ENSG00000099968")
 ```
