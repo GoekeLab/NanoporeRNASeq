@@ -10,9 +10,7 @@ save(sample_info, file = "./data/sample_info.RData", version = 2)
 
 #create bamFiles.RData
 library(Rsamtools)
-bamFileNames <- dir("./inst/extdata/", pattern = '.bam$')
-bamFilePaths <- system.file("extdata", bamFileNames, package="NanoporeRNASeq")
-bamFiles <- BamFileList(bamFilePaths)
+bamFiles <- list.files(system.file("extdata", package="NanoporeRNASeq"), pattern = ".bam$")
 save(bamFiles, file = "./data/bamFiles.RData", version = 2)
 
 #Download the Homo_sapiens.GRCh38.91.gtf from ensembl ftp
