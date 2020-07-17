@@ -9,7 +9,6 @@ sample_info <- DataFrame(readRDS(system.file("extdata","sample_information.rds",
 save(sample_info, file = "./data/sample_info.RData", version = 2)
 
 #create bamFiles.RData
-library(Rsamtools)
 bamFiles <- list.files(system.file("extdata", package="NanoporeRNASeq"), pattern = ".bam$")
 save(bamFiles, file = "./data/bamFiles.RData", version = 2)
 
