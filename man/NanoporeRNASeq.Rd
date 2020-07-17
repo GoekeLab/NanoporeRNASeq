@@ -21,6 +21,6 @@ of the vignette.
 }
 
 \author{
-Chen Ying, Yuk Kei Wan, Jonathan Göke
+Ying Chen, Yuk Kei Wan, Jonathan Göke
 }
 \keyword{package}
