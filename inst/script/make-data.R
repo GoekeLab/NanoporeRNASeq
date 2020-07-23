@@ -5,12 +5,11 @@
 
 #create sample_info.RData
 library(NanoporeRNASeq)
-sample.file <- system.file("extdata","sample_information.rds", package = "NanoporeRNASeq")
-sample_info <- readRDS(sample.file)
+sample_info <- DataFrame(readRDS(system.file("extdata","sample_information.rds", package = "NanoporeRNASeq")))
 save(sample_info, file = "./data/sample_info.RData", version = 2)
 
-#create bamFileNames.RData
-bamFiles = dir("./inst/extdata/", pattern = '.bam$')
+#create bamFiles.RData
+bamFiles <- list.files(system.file("extdata", package="NanoporeRNASeq"), pattern = ".bam$")
 save(bamFiles, file = "./data/bamFiles.RData", version = 2)
 
 #Download the Homo_sapiens.GRCh38.91.gtf from ensembl ftp
