@@ -27,10 +27,17 @@ devtools::load_all()
 library("NanoporeRNASeq")
 ```
 
+### List the samples
+```{r}
+data("sample_info")
+sample_info
+```
+
+
 ### List the bam files
 ```{r}
-data("bamFiles")
-bamFiles <- Rsamtools::BamFileList(system.file("extdata", bamFiles, package = "NanoporeRNASeq"))
+bamFiles <- Rsamtools::BamFileList(system.file("extdata", sample_info$fileNames, package = "NanoporeRNASeq"))
+names(bamFiles) <- sample_info$sample_id
 bamFiles
 ```
 
