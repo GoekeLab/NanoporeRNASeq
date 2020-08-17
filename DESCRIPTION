@@ -22,6 +22,7 @@ Suggests:
     knitr,
     rmarkdown,
     fs,
+    devtools,
     testthat,
     bambu,
     BSgenome.Hsapiens.NCBI.GRCh38,
