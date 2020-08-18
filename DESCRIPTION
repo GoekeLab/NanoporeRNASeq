@@ -22,7 +22,13 @@ Suggests:
     knitr,
     rmarkdown,
     fs,
-    testthat
+    devtools,
+    testthat,
+    bambu,
+    BSgenome.Hsapiens.NCBI.GRCh38,
+    ggbio,
+    ComplexHeatmap,
+    circlize
 Enhances: parallel
 SystemRequirements:
 biocViews: 
@@ -31,5 +37,5 @@ biocViews:
      SequencingData
 bugReports: https://github.com/GoekeLab/bambu/issues
 URL: https://github.com/GoekeLab/bambu   
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

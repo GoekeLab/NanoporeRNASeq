@@ -10,7 +10,6 @@ Data objects include:
 
 \itemize{
 \item {\link{sample_info}} - sample information of the bam files
-\item {\link{bamFiles}} - BamFileList containing the bam files in the package
 \item {\link{annotation}} - annotation GRangesList}
 
 
