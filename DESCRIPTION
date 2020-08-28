@@ -17,7 +17,8 @@ Depends:
    GenomicRanges,
    GenomicFeatures,
    S4Vectors(>= 0.22.1), 
-   IRanges
+   IRanges,
+   ExperimentHub
 Suggests: 
     knitr,
     rmarkdown,
