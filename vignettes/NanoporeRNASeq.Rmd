@@ -18,7 +18,10 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-*[NanoporeRNASeq](https://github.com/GoekeLab/NanoporeRNASeq)* contains single chromosome RNA-Seq data from two common cell lines K562 and MCF7. Each of these cell line has three replicates, with 1 direct RNA sequencing data and 2 cDNA sequencing data. 
+*[NanoporeRNASeq](https://github.com/GoekeLab/NanoporeRNASeq)* contains single
+chromosome RNA-Seq data from two common cell lines K562 and MCF7. Each of these
+cell line has three replicates, with 1 direct RNA sequencing data and 2 cDNA
+sequencing data. 
 
 ## Accessing NanoporeRNASeq data
 ### Load the NanoporeRNASeq package
@@ -36,7 +39,9 @@ sample_info
 
 ### List the bam files
 ```{r}
-bamFiles <- Rsamtools::BamFileList(system.file("extdata", sample_info$fileNames, package = "NanoporeRNASeq"))
+bamFiles <- Rsamtools::BamFileList(system.file("extdata",
+                                            sample_info$fileNames,
+                                            package = "NanoporeRNASeq"))
 names(bamFiles) <- sample_info$sample_id
 bamFiles
 ```
@@ -58,7 +63,10 @@ tx <- autoplot(range, aes(type = model, col=strand), group.selfish = TRUE)
 coverage <- autoplot(bamFiles[[1]], aes(col=coverage),which = range)
 # plot mismatch track
 library(BSgenome.Hsapiens.NCBI.GRCh38)
-mismatch <- autoplot(bamFiles[[1]], stat="mismatch", which=range, bsgenome=Hsapiens)
+mismatch <- autoplot(bamFiles[[1]], 
+                    stat="mismatch",
+                    which=range,
+                    bsgenome=Hsapiens)
 #merge the tracks into one plot
 tracks(annotation = tx, mismatch = mismatch, coverage = coverage,
        heights = c(1, 3, 3))+ theme_minimal()
@@ -78,7 +86,9 @@ library(ggbio)
 ### Run bambu
 Applying bambu to bamFiles 
 ```{r, results = "hide"}
-se <- bambu(reads = bamFiles, annotations = annotation, genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
+se <- bambu(reads = bamFiles,
+            annotations = annotation,
+            genomeSequence = "BSgenome.Hsapiens.NCBI.GRCh38")
 ```
 
 *bambu* returns a SummarizedExperiment object 
@@ -88,7 +98,8 @@ se
 
 
 ### Visualizing gene examples
-We can visualize the annotated and novel isoforms identified in this gene example using plot functions from *bambu*
+We can visualize the annotated and novel isoforms identified in this gene
+example using plot functions from *bambu*
 ```{r, fig.width = 8, fig.height = 10}
 plot.bambu(se, type = "annotation", gene_id = "ENSG00000099968")
 ```
