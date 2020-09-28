@@ -1,8 +1,8 @@
 \name{annotation}
 \alias{annotation}
 \docType{data}
-\title{Annotation granges list prepared from bambu for the used chromosome}
-\description{Annotation granges list prepared from bambu for the used chromosome}
+\title{Annotation GRangesList prepared from bambu for the used chromosome}
+\description{Annotation GRangesList prepared from bambu for the used chromosome}
 \usage{
   data("annotation")
 }
