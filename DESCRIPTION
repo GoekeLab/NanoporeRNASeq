@@ -3,9 +3,11 @@ Type: Package
 Title: Nanopore RNA-Seq data
 Version: 0.99.1
 Authors@R: c(person("Jonathan Goeke", "Developer", role = "aut",
-                     email = "gokej@gis.a-star.edu.sg"),
-              person("Yuk Kei Wan","Developer", role = "aut", email = "yukkeiwan622@gmail.com"),
-              person("Ying Chen", "Developer", role = "cre",email = "chen_ying@gis.a-star.edu.sg"))
+                    email = "gokej@gis.a-star.edu.sg"),
+            person("Ying Chen", "Developer", role = "aut",
+                    email = "chen_ying@gis.a-star.edu.sg"),
+            person("Yuk Kei Wan","Developer", role = "cre",
+                    email = "yukkeiwan622@gmail.com"))
 Description: Nanopore RNA-Seq data examples   
 License: GPL-3 
 Encoding: UTF-8
