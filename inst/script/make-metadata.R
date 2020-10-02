@@ -29,7 +29,7 @@ meta <- data.frame(
   DataProvider = "SGNex",
   Maintainer = "The Singapore Nanopore Expression Project (SG-NEx)  <gokej@gis.a-star.edu.sg>",
   RDataClass = "vector" ,
-  DispatchClass = "BamFile",
+  DispatchClass = c(rep("BamFile",6),"FaFile"),
   RDataPath = c(paste("NanoporeRNASeq/version0.99.1/K562_directcDNA_replicate1.bam",
                       "NanoporeRNASeq/version0.99.1/K562_directcDNA_replicate1.bam.bai",sep=":"),
                 paste("NanoporeRNASeq/version0.99.1/K562_directcDNA_replicate4.bam",
