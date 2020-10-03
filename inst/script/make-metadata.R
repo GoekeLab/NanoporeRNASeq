@@ -20,7 +20,7 @@ meta <- data.frame(
                   "Sequences of region chr22 1 to 25409234 in human GRCh38 DNA sm primary assembly"),
   BiocVersion = "3.12",
   Genome = "GRCh38", 
-  SourceType = c(rep("bam",6),"fa"), 
+  SourceType = c(rep("BAM",6),"FASTA"), 
   SourceUrl = "https://github.com/GoekeLab/sg-nex-data",
   SourceVersion = "30 Sep 2020",
   Species = "Homo sapiens",
