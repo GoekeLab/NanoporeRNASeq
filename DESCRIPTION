@@ -13,8 +13,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: 
-   R(>= 4.0.0),
-   ExperimentHub
+    R(>= 4.0.0),
+    ExperimentHub
 Suggests: 
     knitr,
     rmarkdown,
@@ -24,21 +24,23 @@ Suggests:
     bambu,
     BSgenome.Hsapiens.NCBI.GRCh38,
     ggbio,
+    GenomicAlignments,
     ComplexHeatmap,
     circlize
 Imports: 
-   data.table(>= 1.1.8),
-   SummarizedExperiment(>= 1.1.6),
-   GenomicRanges,
-   GenomicFeatures,
-   S4Vectors(>= 0.22.1), 
-   IRanges
+    data.table(>= 1.1.8),
+    SummarizedExperiment(>= 1.1.6),
+    GenomicRanges,
+    GenomicFeatures,
+    S4Vectors(>= 0.22.1), 
+    IRanges
 Enhances: parallel
 SystemRequirements:
 biocViews: 
-     ExperimentHub,
-     RNASeqData,
-     SequencingData
+    ExperimentHub,
+    ExperimentData,
+    RNASeqData,
+    SequencingData
 bugReports: https://github.com/GoekeLab/NanoporeRNASeq/issues
 URL: https://github.com/GoekeLab/NanoporeRNASeq   
 RoxygenNote: 7.1.1
