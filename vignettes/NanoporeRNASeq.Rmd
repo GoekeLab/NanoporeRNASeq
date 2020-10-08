@@ -11,9 +11,9 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE, tidy = TRUE,
-  warning=FALSE, message=FALSE,
-  comment = "##>"
+    collapse = TRUE, tidy = TRUE,
+    warning=FALSE, message=FALSE,
+    comment = "##>"
 )
 ```
 
@@ -79,7 +79,7 @@ coverage <- autoplot(bamFiles[[1]], aes(col = coverage),which = range)
 
 #merge the tracks into one plot
 tracks(annotation = tx, coverage = coverage,
-       heights = c(1, 3)) + theme_minimal()
+        heights = c(1, 3)) + theme_minimal()
 ```
 
 ## Running Bambu with NanoporeRNASeq data
