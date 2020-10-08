@@ -15,7 +15,7 @@ sample_info is a DataFrame containing the following information:
 
 }
 \usage{
-  data("sample_info")
+    data("sample_info")
 }
 \format{DataFrame}
 \keyword{datasets}
