@@ -23,25 +23,12 @@ Depends:
     ExperimentHub (>= 1.15.3)
 Suggests: 
     knitr,
-    rmarkdown,
-    fs,
-    devtools,
-    testthat,
     bambu,
-    BSgenome.Hsapiens.NCBI.GRCh38,
     ggbio,
-    GenomicAlignments,
-    ComplexHeatmap,
     BiocManager,
-    Rsamtools,
-    circlize
-Imports: 
-    data.table(>= 1.1.8),
-    SummarizedExperiment(>= 1.1.6),
-    GenomicRanges,
-    GenomicFeatures,
-    S4Vectors(>= 0.22.1), 
-    IRanges
+    devtools,
+    BSgenome.Hsapiens.NCBI.GRCh38,
+    Rsamtools
 Enhances: parallel
 SystemRequirements:
 biocViews: 
