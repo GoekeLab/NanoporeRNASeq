@@ -30,7 +30,7 @@ download.file(url =
 gtf.file <- "Homo_sapiens.GRCh38.91.gtf"
 wkdir <- getwd()
 new_gtf.file <- paste0(wkdir, "/Homo_sapiens.GRCh38.91_chr",22,".gtf")
-system(paste0("grep ^22  ",gtf.file," > ",new_gtf.file))
+system2(paste0("grep ^22  ",gtf.file," > ",new_gtf.file))
 annotation.file <- "Homo_sapiens.GRCh38.91_chr22.gtf"
 
 
