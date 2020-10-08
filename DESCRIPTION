@@ -33,7 +33,7 @@ Suggests:
     GenomicAlignments,
     ComplexHeatmap,
     BiocManager,
-    Rsamtools
+    Rsamtools,
     circlize
 Imports: 
     data.table(>= 1.1.8),
