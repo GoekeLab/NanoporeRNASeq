@@ -1,7 +1,7 @@
 Package: NanoporeRNASeq
 Type: Package
 Title: Nanopore RNA-Seq data
-Version: 0.99.2
+Version: 0.99.3
 Authors@R: c(person("Jonathan Goeke", "Developer", role = "aut",
                     email = "gokej@gis.a-star.edu.sg"),
             person("Ying Chen", "Developer", role = "cre",
@@ -19,7 +19,7 @@ License: GPL-3  + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R(>= 4.0.2),
+    R(>= 4.0.0),
     ExperimentHub (>= 1.15.3)
 Suggests: 
     knitr,
