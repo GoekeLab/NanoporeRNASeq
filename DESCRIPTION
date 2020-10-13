@@ -1,6 +1,6 @@
 Package: NanoporeRNASeq
 Type: Package
-Title: Nanopore RNA-Seq data
+Title: Nanopore RNA-Seq Example data
 Version: 0.99.3
 Authors@R: c(person("Jonathan Goeke", "Developer", role = "aut",
                     email = "gokej@gis.a-star.edu.sg"),
@@ -25,9 +25,12 @@ Suggests:
     knitr,
     bambu,
     ggbio,
-    BiocManager,
-    devtools,
     BSgenome.Hsapiens.NCBI.GRCh38,
+    circlize,
+    ComplexHeatmap,
+    apeglm,
+    rlang,
+    GenomicAlignments,
     Rsamtools
 Enhances: parallel
 SystemRequirements:
