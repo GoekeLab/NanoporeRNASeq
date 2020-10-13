@@ -1,10 +1,11 @@
-\name{sample_info}
-\alias{sample_info}
+\name{K562MCF7Samples}
+\alias{K562MCF7Samples}
 \docType{data}
-\title{Sample information of the replicates}
-\description{Sample information description for the two cancer cell lines}
+\title{K562 and MCF7 samples from Nanopore RNA-Seq}
+\description{Sample information description for K562 and MCF7 
+samples from Nanopore RNA-Seq}
 \details{
-sample_info is a DataFrame containing the following information:
+K562MCF7Samples is a DataFrame containing the following information:
 
 \itemize{
 \item sample_id - sample names of the bam files
@@ -15,7 +16,7 @@ sample_info is a DataFrame containing the following information:
 
 }
 \usage{
-    data("sample_info")
+    data("K562MCF7Samples")
 }
 \format{DataFrame}
 \keyword{datasets}

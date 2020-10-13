@@ -14,8 +14,8 @@ SG-NEx project. Please see the package vignette for examples and use cases.
 Data objects include:
 
 \itemize{
-\item {\link{sample_info}} - sample information of the bam files
-\item {\link{annotation}} - annotation GRangesList}
+\item {\link{K562MCF7Samples}} - sample information of the bam files
+\item {\link{HsChr22HalfBambuAnnotation}} - annotation GRangesList}
 
 
 For detailed information on usage, see the package vignette, by typing
