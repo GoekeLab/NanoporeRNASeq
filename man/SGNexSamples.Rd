@@ -1,11 +1,11 @@
-\name{K562MCF7Samples}
-\alias{K562MCF7Samples}
+\name{SGNexSamples}
+\alias{SGNexSamples}
 \docType{data}
-\title{K562 and MCF7 samples from Nanopore RNA-Seq}
+\title{SG-Nex samples from Nanopore RNA-Seq}
 \description{Sample information description for K562 and MCF7 
-samples from Nanopore RNA-Seq}
+samples from SG-Nex}
 \details{
-K562MCF7Samples is a DataFrame containing the following information:
+SGNexSamples is a DataFrame containing the following information:
 
 \itemize{
 \item sample_id - sample names of the bam files
@@ -16,7 +16,7 @@ K562MCF7Samples is a DataFrame containing the following information:
 
 }
 \usage{
-    data("K562MCF7Samples")
+    data("SGNexSamples")
 }
 \format{DataFrame}
 \keyword{datasets}

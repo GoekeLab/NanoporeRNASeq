@@ -5,7 +5,7 @@
 
 #create sample_info.RData
 library(NanoporeRNASeq)
-K562MCF7Samples <-
+SGNexSamples <-
     DataFrame(readRDS(system.file("extdata","sample_information.rds",
         package = "NanoporeRNASeq")))
 replicate_names <- c("K562_directcDNA_replicate1",
@@ -16,8 +16,8 @@ replicate_names <- c("K562_directcDNA_replicate1",
     "MCF7_directRNA_replicate4")
 bamFileNames <- paste0("NanoporeRNASeq/version0.99.1/",
         replicate_names,".bam")
-K562MCF7Samples$fileNames <- bamFileNames
-save(K562MCF7Samples, file = "./data/K562MCF7Samples.RData", version = 2)
+SGNexSamples$fileNames <- bamFileNames
+save(SGNexSamples, file = "./data/SGNexSamples.RData", version = 2)
 
 
 #Download the Homo_sapiens.GRCh38.91.gtf from ensembl ftp
@@ -40,5 +40,5 @@ annotationGrangesList <- prepareAnnotations(annotation.file)
 gr <- GRanges(seqnames = "22", ranges = IRanges(1, 25409234),
     strand = "+")
 hits <- findOverlaps(annotationGrangesList, gr, ignore.strand = TRUE)
-HsChr22HalfBambuAnnotation <- annotationGrangesList[queryHits(hits)]
-save(HsChr22HalfBambuAnnotation, file = "./data/HsChr22HalfBambuAnnotation.RData", version = 2)
+HsChr22BambuAnnotation <- annotationGrangesList[queryHits(hits)]
+save(HsChr22BambuAnnotation, file = "./data/HsChr22BambuAnnotation.RData", version = 2)
