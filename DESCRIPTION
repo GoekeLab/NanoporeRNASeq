@@ -38,6 +38,7 @@ biocViews:
     ExperimentHub,
     ExperimentData,
     RNASeqData,
+    Genome,
     SequencingData
 bugReports: https://github.com/GoekeLab/NanoporeRNASeq/issues
 URL: https://github.com/GoekeLab/NanoporeRNASeq   
