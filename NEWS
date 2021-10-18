@@ -1,3 +1,10 @@
+NanoporeRNASeq v1.3.6 (Change date:2021-10-18)
+==============
+
+    * Update accession number for genomeSequence 
+    * Update fasta file 
+    * add rmarkdown to avoid build error
+
 NanoporeRNASeq v0.99.1 (Release date: 2020-10-08)
 ==============
 
