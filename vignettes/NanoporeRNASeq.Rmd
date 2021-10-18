@@ -75,7 +75,7 @@ tracks(annotation = tx, coverage = coverage,
 ```{r load bambu}
 library(bambu)
 genomeSequenceData <- query(ExperimentHub(), c("NanoporeRNA", "GRCh38","FASTA"))
-genomeSequence <- genomeSequenceData[["EH3814"]]
+genomeSequence <- genomeSequenceData[["EH7260"]]
 ```
 
 ### Run bambu
