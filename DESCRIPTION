@@ -1,12 +1,12 @@
 Package: NanoporeRNASeq
 Type: Package
 Title: Nanopore RNA-Seq Example data
-Version: 1.3.3
-Authors@R: c(person("Jonathan Goeke", "Developer", role = "aut",
+Version: 1.3.4
+Authors@R: c(person("Jonathan", "Goeke", role = "aut",
                     email = "gokej@gis.a-star.edu.sg"),
-            person("Ying Chen", "Developer", role = "cre",
+            person("Ying", "Chen", role = "cre",
                     email = "chen_ying@gis.a-star.edu.sg"),
-            person("Yuk Kei Wan","Developer", role = "aut",
+            person("Yuk Kei","Wan", role = "aut",
                     email = "yukkeiwan622@gmail.com"))
 Description: The NanoporeRNASeq package contains long read RNA-Seq data 
     generated using Oxford Nanopore Sequencing. The data consists of 6 samples
