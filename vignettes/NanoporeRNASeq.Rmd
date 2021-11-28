@@ -61,7 +61,7 @@ range <- HsChr22BambuAnnotation$ENST00000215832
 # plot mismatch track
 library(BSgenome.Hsapiens.NCBI.GRCh38)
 # plot annotation track
-tx <- autoplot(range, aes(type = model, col = strand), group.selfish = TRUE)
+tx <- autoplot(range, aes(col = strand), group.selfish = TRUE)
 # plot coverage track
 coverage <- autoplot(bamFiles[[1]], aes(col = coverage),which = range)
 
