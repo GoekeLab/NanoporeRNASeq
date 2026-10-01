@@ -95,7 +95,7 @@ se
 ### Visualizing gene examples
 We can visualize the annotated and novel isoforms identified in this gene
 example using plot functions from *bambu*
-```{r, fig.width = 8, fig.height = 10}
+```{r, fig.width = 8, fig.height = 10, eval = FALSE}
 plotBambu(se, type = "annotation", gene_id = "ENSG00000099968")
 ```
 ```{r}
